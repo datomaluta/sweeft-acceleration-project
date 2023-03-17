@@ -12,7 +12,7 @@ const useGetAllUserData = (pageNumber) => {
       setIsLoading(true);
       setErrror(false);
       const response = await axios.get(
-        `https://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${pageNumber}/24`
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${pageNumber}/24`
       );
 
       setUsers((prevUsers) => {

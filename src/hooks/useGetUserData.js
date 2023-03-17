@@ -16,7 +16,7 @@ const useGetUserData = (id) => {
       setIsLoading(true);
       setError(false);
       const response = await axios.get(
-        `https://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}`
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}`
       );
       setUser(response.data);
       setBrowsingHistory((prevUsers) => {
