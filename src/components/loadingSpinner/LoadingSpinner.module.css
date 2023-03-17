@@ -12,6 +12,7 @@
   text-indent: -9999em;
   /* margin: 88px auto; */
   position: fixed;
+  left: 50%;
   bottom: 10%;
   /* position: relative; */
   font-size: 11px;

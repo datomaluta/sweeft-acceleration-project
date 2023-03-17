@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useGetData = (pageNumber) => {
+const useGetAllUserData = (pageNumber) => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setErrror] = useState(false);
@@ -27,4 +27,4 @@ const useGetData = (pageNumber) => {
   return { users, isLoading, error, hasMore };
 };
 
-export default useGetData;
+export default useGetAllUserData;
