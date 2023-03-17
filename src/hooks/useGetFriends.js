@@ -16,7 +16,7 @@ const useGetFriends = (id, friendsPageNumber) => {
       setIsLoading(true);
       setError(false);
       const response = await axios.get(
-        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${friendsPageNumber}/14`
+        `https://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${friendsPageNumber}/14`
       );
 
       setFriends((prevUsers) => {
