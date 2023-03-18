@@ -16,7 +16,7 @@ const useGetFriends = (id, friendsPageNumber) => {
       setIsLoading(true);
       setError(false);
       const response = await axios.get(
-        `/elasticbeanstalk/user/${id}/friends/${friendsPageNumber}/14`
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${friendsPageNumber}/14`
       );
 
       setFriends((prevUsers) => {
@@ -25,7 +25,9 @@ const useGetFriends = (id, friendsPageNumber) => {
       setHasMore(response.data.list.length > 0);
       setIsLoading(false);
     };
-    getData().catch(() => setError("Something went wrong"));
+    getData().catch(() =>
+      setError("Something went wrong with friends list fetching")
+    );
   }, [friendsPageNumber, id]);
 
   return { friends, isLoading, error, hasMore };

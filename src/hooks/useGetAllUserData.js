@@ -12,7 +12,7 @@ const useGetAllUserData = (pageNumber) => {
       setIsLoading(true);
       setErrror(false);
       const response = await axios.get(
-        `/elasticbeanstalk/user/${pageNumber}/24`
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${pageNumber}/24`
       );
 
       setUsers((prevUsers) => {
@@ -21,7 +21,9 @@ const useGetAllUserData = (pageNumber) => {
       setHasMore(response.data.list.length > 0);
       setIsLoading(false);
     };
-    getData().catch(() => setErrror("Something went wrong"));
+    getData().catch(() =>
+      setErrror("Something went wrong with users data fetching!")
+    );
   }, [pageNumber]);
 
   return { users, isLoading, error, hasMore };

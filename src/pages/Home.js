@@ -1,27 +1,22 @@
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
+import CardContent from "../components/shared/CardContent";
 import useGetAllUserData from "../hooks/useGetAllUserData";
+import useObserver from "../hooks/useObserver";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { users, isLoading, hasMore, error } = useGetAllUserData(currentPage);
 
-  const observer = useRef();
-  const lastUserRef = useCallback(
-    (node) => {
-      if (isLoading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          setCurrentPage((prevPage) => prevPage + 1);
-        }
-      });
-      if (node) {
-        observer.current.observe(node);
-      }
-    },
-    [isLoading, hasMore]
+  const currentPageHandler = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const { lastElementRef: lastUserRef } = useObserver(
+    isLoading,
+    hasMore,
+    currentPageHandler
   );
 
   return (
@@ -36,19 +31,7 @@ const Home = () => {
               ref={users.length === index + 1 ? lastUserRef : null}
               className="max-w-[17.375rem] w-full lg:max-w-full border border-gray-400 shadow-xl h-[17.5rem] lg:max-h-[24rem] lg:h-full "
             >
-              <div className="w-full">
-                <img
-                  className="w-full  lg:max-h-[20rem] h-full object-cover"
-                  src={user.imageUrl + "/" + user.id}
-                  alt="avatar"
-                />
-              </div>
-              <div className="px-2">
-                <p className="font-bold">
-                  {user.prefix} {user.name} {user.lastName}
-                </p>
-                <p>{user.title}</p>
-              </div>
+              <CardContent user={user} />
             </Link>
           );
         })}
