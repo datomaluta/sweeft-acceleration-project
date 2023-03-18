@@ -16,12 +16,16 @@ const useGetFriends = (id, friendsPageNumber) => {
       setIsLoading(true);
       setError(false);
       const response = await axios.get(
-        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${friendsPageNumber}/14`
+        `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}/friends/${friendsPageNumber}/20`
       );
 
-      setFriends((prevUsers) => {
-        return [...prevUsers, ...response.data.list];
-      });
+      if (friendsPageNumber === 1) {
+        setFriends(response.data.list);
+      } else {
+        setFriends((prevUsers) => {
+          return [...prevUsers, ...response.data.list];
+        });
+      }
       setHasMore(response.data.list.length > 0);
       setIsLoading(false);
     };

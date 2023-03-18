@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ScrollToTop from "../components/helpers/ScrollToTop";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
@@ -12,12 +12,18 @@ import useObserver from "../hooks/useObserver";
 const UserPage = () => {
   const { id } = useParams();
   const [friendsPageNumber, setFriendsPageNumber] = useState(1);
+
+  useEffect(() => {
+    setFriendsPageNumber(1);
+  }, [id]);
+
   const {
     user,
     isLoading: userInfoIsLoading,
     error: userError,
     browsingHistoryList,
   } = useGetUserData(id);
+
   const {
     friends,
     isLoading: friendListIsLoading,
