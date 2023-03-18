@@ -39,7 +39,7 @@ git clone https://github.com/datomaluta/sweeft-acceleration-project.git
 2\. Next, go to app directory with this command
 
 ```sh
-cd sweeft-user-app
+cd sweeft-acceleration-project
 ```
 
 3\. Next step requires install all the dependencies.
